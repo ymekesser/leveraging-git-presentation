@@ -7,6 +7,7 @@ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
     <title>Leveraging git for your development workflow</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="styles.css">
+    
   </head>
   <body>
     <textarea id="source">
@@ -27,6 +28,10 @@ class: center, middle
 
 # Introduction
 
+```
+$ git init --clone
+```
+
 ---
 
 # Links
@@ -42,7 +47,10 @@ class: center, middle
     <script src="https://remarkjs.com/downloads/remark-latest.min.js">
     </script>
     <script>
-      var slideshow = remark.create();
+      var slideshow = remark.create({
+        highlightLanguage: "bash",
+        highlightStyle: "dracula",
+      });
     </script>
   </body>
 </html>
