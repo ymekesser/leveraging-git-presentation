@@ -16,3 +16,7 @@ h3 {
 .remark-inline-code {
     font-family: 'Ubuntu Mono';
 }
+
+.title-logo img {
+    width: 25%;
+}
