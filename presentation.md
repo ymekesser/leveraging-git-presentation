@@ -264,6 +264,165 @@ class: center, middle
 
 ---
 
+# The basics
+## you probably already know
+```
+$ git pull
+```
+To sync your local repository
+
+```
+$ git add
+```
+To stage files for a commit
+
+```
+$ git commit
+```
+To commit the staged files
+
+```
+$ git push
+```
+To sync your changes to your main repository
+
+.center[But Git can do __so much__ more!]
+
+---
+
+# Preparing your commits
+## Setting up the stage
+
+Git knows three areas where your changes can be:
+
+.areas[![Centered image](img/areas.png)]
+
+.addendum[The stash can be viewed as a fourth area] 
+
+---
+
+# Preparing your commits
+## xxx
+
+```
+$ git commit -a -m "Added some stuff"
+```
+If you want to keep it simple this time. .addendum[Note: This does not add untracked files!]
+
+???
+
+Oftentimes, it's enough to just add all files and commit them right away
+
+---
+
+# Digging in the past
+## The log command
+
+```
+$ git log [file]
+```
+Shows you the commit logs, most recent at top
+
+```
+$ git log -3
+```
+Shows you only the 3 most recent commits
+
+```
+$ git --after="2017-08-21" --before="2017-09-02"
+```
+Shows you only commits between those two dates.
+Great to list commits from a specific sprint or search for a bug.
+
+```
+$ git --author="Johnny"
+```
+Shows only the commits where the author contains "Johnny". Allows for Regular expressions too!
+
+---
+# Digging in the past
+## More filters
+
+```
+git log --grep="JRA-1983"
+```
+Filters commits by their message. Very useful if you include your issue-ID in the message (which you should)
+
+```
+$ git <since>..<until>
+```
+Allows you to show commits in a range between two _commit references_.
+This is especially great to compare branches:
+
+```
+$ git master..feature
+```
+Shows you the commits which are in the feature branch, but not in the master branch. .addendum[If you switch it to feature..master you will see what commits are missing from feature]
+
+---
+# Digging in the past
+## Some more tricks
+
+```
+$ git log -L <start>,<end>:<file>
+$ git log -L 42,50:MyFile.cs
+```
+Tracks the history of the code on line 42 - 50 in your file. Shows you e.g. how a method evolved.
+
+
+---
+
+# Digging in the past
+## Formatting the output
+
+```
+$ git log --oneline
+```
+Shows you a much quicker summary
+
+```
+$ git log --stat
+```
+For each commit, list all changed files and how many lines changed
+
+```
+$ git log --patch
+```
+If you want to see the whole diffs for each commit
+
+```
+$ git log --graph
+```
+Draws your history as an ASCII graph. Look at your history as the graph it really is.
+
+---
+
+# Digging in the past
+## Going crazy with formatting
+
+By combining formatting and including some _pretty_ formatting, you can get really nice outputs:
+```
+$ git log --graph --abbrev-commit --decorate --pretty=format:"%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)" --all
+```
+
+It's not quite easy to type though...
+
+---
+
+# Adapting Git for your needs
+## Aliases
+
+Aliases allow you to save complex commands under a simpler name.
+
+```
+$ git config --global alias.co checkout
+$ git config --global alias.br branch
+$ git config --global alias.ci commit
+$ git config --global alias.st status
+```
+
+---
+
 class: center, middle
 
 # The bigger picure
@@ -285,3 +444,4 @@ class: center, middle
 
 * Git Logo by [Jason Long](https://twitter.com/jasonlong) is licensed under the [Creative Commons Attribution 3.0 Unported License](https://creativecommons.org/licenses/by/3.0/).
 * [Stack Overflow Developer Survey Results 2017](https://insights.stackoverflow.com/survey/2017#overview)
+* [Tips and Tricks: Gotta Git Them All - GitHub Universe 2016](https://www.youtube.com/watch?v=LsxDxL4PYik) 
