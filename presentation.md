@@ -1,7 +1,8 @@
 name: title
 class: center, middle
 
-# Leveraging Git for your development workflow
+# Leveraging Git
+## for your development workflow
 .title-logo[![Right-aligned image](img\Git-Icon-1788C.png)]
 
 ---
@@ -30,9 +31,9 @@ name: agenda
 
 class: middle
 
-What are the 3 most important tools for software development?
+What are the 3 most important tools for modern software development?
 
---
+???
 
 * Editor
 * Source Control
@@ -131,6 +132,38 @@ You can keep your master copy behind 3 firewalls
   * Not talking about feature branches. Everybody has his own branch by design, branched from the origin one.
   * Branching is more inherent when being distributed
 
+* Performance:
+  * SC should help you, not slow you down. So it _has_ to be fast.
+
+---
+
+# Distributed Source Control
+
+* Trust
+  * You can trust your data
+    * Without trusting everybody else
+    * Without trusting your hosting
+
+* Release Engineering
+  * Managing versions was never easier
+
+* Security  
+  * No single point of failure
+  * Natural data replication
+  * Everything is checksummed
+  * Keep your master copy behind 3 firewalls
+
+???
+
+* Trust:
+  * You are the master of your repository
+  * People can have read access and do their work incl. branching and commit - but they can't read 
+  * Which hoster would you trust the _master copy_ of your source code with?
+
+* Security
+  * SHA-1 is not as secure anymore
+  * The hash is mostly a consistency feature, but has security benefits
+
 ---
 
 # Key points
@@ -156,7 +189,26 @@ class: center, middle
 # Git in a nutshell
 
 * History: A one-direction graph
-* Git: A set of commands to manipulate it
+* Git: A set of tools to manipulate it
+
+---
+
+# Primitives
+
+Data structures:
+  * _blob_: content of a file
+  * _tree_: Hierarchy of blobs, a directory
+  * _commit_: Contains a tree (the top-level directory), a timestamp, a message and reference 0-2 parents.
+
+Note: Everything is identified via its SHA-1 hash!
+
+References:
+  * _heads_: Refers to an object locally
+    * _HEAD_: Refers to the currently checked out commit
+    * _branches_: Refer to a commit, 'follows' commits when checked out
+  * _remotes_: Refers to an object in a remote repository
+  * _stash_: Refers to an uncommitted object
+  * _tags_: Refers to a fixed point in history
 
 ---
 
