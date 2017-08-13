@@ -369,7 +369,6 @@ $ git log -L 42,50:MyFile.cs
 ```
 Tracks the history of the code on line 42 - 50 in your file. Shows you e.g. how a method evolved.
 
-
 ---
 
 # Digging in the past
@@ -409,10 +408,12 @@ It's not quite easy to type though...
 
 ---
 
-# Adapting Git for your needs
+# Adapting Git to your needs
 ## Aliases
 
 Aliases allow you to save complex commands under a simpler name.
+
+They can save you time:
 
 ```
 $ git config --global alias.co checkout
@@ -420,6 +421,96 @@ $ git config --global alias.br branch
 $ git config --global alias.ci commit
 $ git config --global alias.st status
 ```
+
+Or nerves:
+```
+$ git config --global alias.gerp grep
+```
+
+Use aliases to adapt the default behaviour in a way that suits you:
+```
+$ git config --global alias.stash stash --include-untracked
+```
+
+.addendum[Without the `--global` flag, the alias is only applied to the current repository]
+
+???
+
+* There is no specific alias command in git
+* You do it via git config, which updates the local or global git config (just a file .git/config)
+
+* The stash command by default only works on unstaged and staged changes, but ignores untracked files (e.g. new ones) 
+
+---
+
+# Adapting Git to your needs
+## Aliases for chained commands
+
+The `!` prefix lets git execute the command in the shell. This allows you to
+* include shell commands
+* use parameters
+
+E.g.
+```
+$ git config alias.findBranch = "!git branch | grep -i"
+
+$ git findBranch JIRA-123
+```
+This helps you find the correct feature branch for an issue.
+
+???
+
+* Note that Parameters are appended to the end!
+
+---
+
+# Adapting Git to your needs
+## Aliases for recurring tasks
+
+```
+[alias]
+caa = commit -a --amend -C HEAD
+```
+
+
+```
+[alias]
+standup = !git log --all --author=$USER --since="9am yesterday" --format=%s
+```
+
+.addendum[Source: Tim Pettersen from BitBucket]
+
+--
+```
+lazy-standup = !git standup | say
+```
+
+.addendum[Source: Tim Pettersen from BitBucket]
+
+???
+* standup:
+  * shows commits from all branches
+  * filters by my user (just hardcode it if $USER is not supported)
+  * filters only commits since the last daily
+    * not the amazing datetime parsing
+  * formats it to only show the subject
+
+* lazy-standup
+  * pipes the output to a speech synthesyzer (say on macos)
+  * great if your working from remote!
+
+---
+
+# Adapting Git to your needs
+## Sharing Aliases in your project
+
+Use git of course!
+
+store them e.g. in a separate repository
+
+link them via [include]
+
+note: do not include random stuff - it's code you exectute locally
 
 ---
 
@@ -444,4 +535,5 @@ class: center, middle
 
 * Git Logo by [Jason Long](https://twitter.com/jasonlong) is licensed under the [Creative Commons Attribution 3.0 Unported License](https://creativecommons.org/licenses/by/3.0/).
 * [Stack Overflow Developer Survey Results 2017](https://insights.stackoverflow.com/survey/2017#overview)
-* [Tips and Tricks: Gotta Git Them All - GitHub Universe 2016](https://www.youtube.com/watch?v=LsxDxL4PYik) 
+* [Tips and Tricks: Gotta Git Them All - GitHub Universe 2016](https://www.youtube.com/watch?v=LsxDxL4PYik)
+* [Git Aliases of the Gods! - Git Merge 2017](https://www.youtube.com/watch?v=3IIaOj1Lhb0)
