@@ -37,6 +37,7 @@ What are the 3 most important tools for modern software development?
 
 * Editor
 * Source Control
+  * .addendum[also known as: Version Control, Revision Control, Source Control Managment]
 * Build infrastructure
 
 ---
@@ -47,12 +48,7 @@ What are the 3 most important tools for modern software development?
 $ git init
 ```
 
-
-```sql
-SELECT *
-FROM table
-WHERE table.col LIKE '%a';
-```
+<br>
 
 * Professional software development relies on source control
 * Especially for
@@ -60,9 +56,11 @@ WHERE table.col LIKE '%a';
   * Agile development
   * Release Management
 
-* In short: Source control is essential for, but not limited to, multi-developer software projects.
+* In short: Source control is _essential_ for, but not limited to, multi-developer software projects.
+  * (but it is not limited to software development)
 
-(but it is not limited to software development)
+???
+A modern software project deserves a modern Source Control
 
 ---
 
@@ -74,10 +72,9 @@ class: center, middle
 
 # History
 ## The dark, centralized ages
-(excerpt)
 
 * Concurrent Versions System (CVS), 1990
-  * xxxx
+  * Was very widespread, esp. in OSS community
 * Subversion (SVN), 2000
   * “CVS done right”
 * Visual Source Safe (VSS), 2005
@@ -85,20 +82,60 @@ class: center, middle
 * Team Foundation Server (TFS), 2006
   * SVN but you have to pay for it
 
+???
+
+* CVS Development stopped in 2008
+* SVN tried to fix mistakes from CVS, but failed to update its broken core principles
+* VSS was hell
+* TFS is more than Source Control. Huge step from VSS, but __TFVC__ is still bad, makes the same mistakes as SVN.
+  * Also: the default Source Control for TFS is now git.
 ---
 
 # History
 ## The distributed age
-(excerpt)
 
 * Bitkeeper, 2000
+  * Proprietary, but was used for Linux kernel
 * **Git**, 2005
+  * Developed by Linus Torvalds to replace Bitkeeper
 * Mercurial, 2005
+  * Also tried to replace Bitkeeper for Linux. Now used e.g. by Facebook and Mozilla
 * Bazaar, 2005
+  * A mix of distributed and centralized concepts
+
+???
+
+* The first three are all a bit related.
+* Bitkeeper was proprietary, but a free community version existed and was catered for linux
+  * Bitkeeper finally became Open Source in 2016
+* There were concerns about using proprietary software for a flagship OSS project.
+  * Torvalds was not quite happy with Bitkeeper anyway and decided to "do it right"
+* At the same time, Matt Mackall implemented Mercurial for use with the Linux Kernel
+  * Technically, the systems are quite similar
+* Mercurial vs. Git was a holy war in hacker culture
+  * In the end, the Linux Kernel Project chose Git.
+
+* Mercurial:
+  Mozilla, Facebook
+
 
 ---
 
 # Distributed Source Control
+## Concepts
+
+* Peer-to-peer approach instead of single, central repository
+* Every clients copy is a complete repository, including full History
+  * You can still have a 'main' repository - but its not different from your local one
+* Common operations are local
+* Communication is only necessary when sharing changes amongst peers.
+
+.full-width[![Centered image](img/centralized_vs_distributed.PNG)]
+
+---
+
+# Distributed Source Control
+## Benefits
 
 * Obvious benefit: Offline Working
 * Improves collaboration
@@ -106,21 +143,6 @@ class: center, middle
   * Branching is inherent
 * Performance
   * Operations are local
-* Trust
-* Release Engineering
-* Security
-
-
-Trust your data
-Without having to implicitly trust everybody else
-Without having to implicitly trust your hosting
-Release Engineering
-Trust and Security
-No single point of failure
-Natural replication of data
-Everything is checksumed with a strong hash (relative)
-Sha1 is mostly a consistency feature
-You can keep your master copy behind 3 firewalls
 
 ???
 
@@ -138,16 +160,15 @@ You can keep your master copy behind 3 firewalls
 ---
 
 # Distributed Source Control
+## Benefits
 
 * Trust
   * You can trust your data
     * Without trusting everybody else
     * Without trusting your hosting
-
 * Release Engineering
   * Managing versions was never easier
-
-* Security  
+* Security
   * No single point of failure
   * Natural data replication
   * Everything is checksummed
@@ -157,12 +178,37 @@ You can keep your master copy behind 3 firewalls
 
 * Trust:
   * You are the master of your repository
-  * People can have read access and do their work incl. branching and commit - but they can't read 
+  * People can have read access and do their work incl. branching and commit - but they can't read
   * Which hoster would you trust the _master copy_ of your source code with?
 
 * Security
   * SHA-1 is not as secure anymore
   * The hash is mostly a consistency feature, but has security benefits
+
+---
+
+# What Professional Developers use in 2017
+![image](img/version_control_so_survey.PNG)
+
+.addendum[Source: Stack Overflow Developer Survey 2017]
+
+---
+
+# Who uses Git
+
+Some important players:
+* Linux Kernel project
+* Google
+* facebook
+* Microsoft is migrating Microsoft Windows development to git
+  * They're developing the Git Virtual File System (GVFS)
+* Twitter
+* LinkedIn
+* Netflix
+* Eclipse Foundation
+* Android
+* etc...
+
 
 ---
 
@@ -212,6 +258,24 @@ References:
 
 ---
 
+class: center, middle
+
+# Tips for daily use
+
+---
+
+class: center, middle
+
+# The bigger picure
+
+---
+
+class: center, middle
+
+# Further pointers
+
+---
+
 # Links
 * Official Website: https://git-scm.com
 
@@ -219,4 +283,5 @@ References:
 
 # Sources
 
-* Git Logo by [Jason Long](https://twitter.com/jasonlong) is licensed under the [Creative Commons Attribution 3.0 Unported License](https://creativecommons.org/licenses/by/3.0/). 
+* Git Logo by [Jason Long](https://twitter.com/jasonlong) is licensed under the [Creative Commons Attribution 3.0 Unported License](https://creativecommons.org/licenses/by/3.0/).
+* [Stack Overflow Developer Survey Results 2017](https://insights.stackoverflow.com/survey/2017#overview)

@@ -1,3 +1,4 @@
+$secondary-text-color: #444;
 body {
     font-family: 'Droid Serif';
 }
@@ -7,6 +8,21 @@ h2,
 h3 {
     font-family: 'Yanone Kaffeesatz';
     font-weight: normal;
+}
+
+h1+h2 {
+    margin-top: -1em;
+    font-size: 35px !important;
+    color: $secondary-text-color;
+}
+
+.addendum {
+    font-size: 0.8em;
+    color: $secondary-text-color;
+}
+
+.full-width>img {
+    width: 100%;
 }
 
 .remark-code,
@@ -22,7 +38,6 @@ h3 {
     &>ol>li {
         margin-bottom: 1em;
     }
-
     code {
         opacity: .5;
     }
