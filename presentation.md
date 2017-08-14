@@ -347,6 +347,16 @@ Shows only the commits where the author contains "Johnny". Allows for Regular ex
 git log --grep="JRA-1983"
 ```
 Filters commits by their message. Very useful if you include your issue-ID in the message (which you should)
+```
+$ git log -L <start>,<end>:<file>
+$ git log -L 42,50:MyFile.cs
+```
+Tracks the history of the code on line 42 - 50 in your file. Shows you e.g. how a method evolved.
+
+
+---
+# Digging in the past
+## Comparing your branches
 
 ```
 $ git <since>..<until>
@@ -358,16 +368,6 @@ This is especially great to compare branches:
 $ git master..feature
 ```
 Shows you the commits which are in the feature branch, but not in the master branch. .addendum[If you switch it to feature..master you will see what commits are missing from feature]
-
----
-# Digging in the past
-## Some more tricks
-
-```
-$ git log -L <start>,<end>:<file>
-$ git log -L 42,50:MyFile.cs
-```
-Tracks the history of the code on line 42 - 50 in your file. Shows you e.g. how a method evolved.
 
 ---
 
@@ -447,21 +447,37 @@ $ git config --global alias.stash stash --include-untracked
 ## Aliases for chained commands
 
 The `!` prefix lets git execute the command in the shell. This allows you to
+* chain multiple git commands
 * include shell commands
 * use parameters
 
-E.g.
 ```
 $ git config alias.findBranch = "!git branch | grep -i"
-
 $ git findBranch JIRA-123
 ```
 This helps you find the correct feature branch for an issue.
 
+Tip: Wrap more complex commands into a shell function: 
+```
+[alias]
+bclean = "!f() {
+    git branch --merged ${1-master} 
+    | grep -v " ${1-master}$" 
+    | xargs -r git branch -d; }; f"
+```
+This cleans up all merged branches.
+
 ???
 
-* Note that Parameters are appended to the end!
-
+* First snippet
+  * Note that Parameters are appended to the end!
+* Second snippet
+  * lists all branches which are merged into a branch (argument)
+  * grep to exclude the branch itself
+  * then delete them
+  * $n is the nth argument
+  * note that $0 is the script itself
+  * ${1-master} means that the default value for the first argument is "master"
 ---
 
 # Adapting Git to your needs
@@ -469,10 +485,11 @@ This helps you find the correct feature branch for an issue.
 
 ```
 [alias]
+cma = !git add -A; commit -m
 caa = commit -a --amend -C HEAD
 ```
 
-
+For your daily standup:
 ```
 [alias]
 standup = !git log --all --author=$USER --since="9am yesterday" --format=%s
@@ -484,8 +501,6 @@ standup = !git log --all --author=$USER --since="9am yesterday" --format=%s
 ```
 lazy-standup = !git standup | say
 ```
-
-.addendum[Source: Tim Pettersen from BitBucket]
 
 ???
 * standup:
@@ -506,17 +521,31 @@ lazy-standup = !git standup | say
 
 Use git of course!
 
-store them e.g. in a separate repository
+Store them e.g. in a separate repository
 
-link them via [include]
+Then link them in your local or global config via `[include]`
+```
+[include]
+./path/to/your/repository
+```
 
-note: do not include random stuff - it's code you exectute locally
+.addendum[Note: do not include random stuff - it's code you execute locally]
+
+---
+
+# Rewriting History
+## The history is written by winners
 
 ---
 
 class: center, middle
 
 # The bigger picure
+
+---
+
+# GitFlow
+## A way to make modern software development manageable
 
 ---
 
