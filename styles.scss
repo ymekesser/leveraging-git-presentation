@@ -25,6 +25,10 @@ h1+h2 {
     width: 100%;
 }
 
+.full-height>img {
+    height: 100%;
+}
+
 .remark-code,
 .remark-inline-code {
     font-family: 'Ubuntu Mono';
@@ -43,6 +47,10 @@ h1+h2 {
     }
 }
 
-.areas img {
+.areas>img {
     width: 50%;
+}
+
+.guitar-hero>img {
+    height: 600px;
 }

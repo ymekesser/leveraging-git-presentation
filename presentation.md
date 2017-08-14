@@ -302,7 +302,11 @@ Git knows three areas where your changes can be:
 ---
 
 # Preparing your commits
-## xxx
+## 
+
+---
+
+# Committing your work
 
 ```
 $ git commit -a -m "Added some stuff"
@@ -534,7 +538,40 @@ Then link them in your local or global config via `[include]`
 ---
 
 # Rewriting History
+## Things can get messy
+
+.guitar-hero[![image](img/guitar_hero.png)]
+
+???
+  * if your history looks like a guitar hero level on hard, then it's time to clean up
+
+---
+
+# Rewriting History
 ## The history is written by winners
+
+* Changing your log is actually encouraged!
+* Git offers powerful tools to do so:
+* Important: only update the history of your __private__ branches
+
+---
+
+# Rewriting History
+## Erasing your mistakes
+
+```
+$ git commit --amend 
+```
+To add the staged changes to the latest commit
+
+---
+
+# Rewriting History
+## The catch
+
+* actually copies the commits
+  * also mention show reflog
+* show graph with example
 
 ---
 
@@ -552,6 +589,12 @@ class: center, middle
 class: center, middle
 
 # Further pointers
+
+---
+# todo
+
+* git man pages and documentation
+  * show format for rebase and merge
 
 ---
 
