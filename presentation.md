@@ -530,7 +530,7 @@ This cleans up all merged branches.
 
 ```
 [alias]
-cma = !git add -A; commit -m
+cma = !git add -A; git commit -m
 caa = commit -a --amend -C HEAD
 ```
 
