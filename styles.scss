@@ -29,6 +29,10 @@ h1+h2 {
     height: 100%;
 }
 
+.half-width>img {
+    width:50%;
+}
+
 .remark-code,
 .remark-inline-code {
     font-family: 'Ubuntu Mono';

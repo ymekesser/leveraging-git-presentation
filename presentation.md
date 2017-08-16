@@ -592,8 +592,11 @@ Then link them in your local or global config via `[include]`
 ## The history is written by winners
 
 * Changing your log is actually encouraged!
-* Git offers powerful tools to do so:
+* Git offers powerful tools to do so
 * Important: only update the history of your __private__ branches
+
+???
+not sure if this slide is really needed or if it should be a conclusion
 
 ---
 
@@ -603,16 +606,36 @@ Then link them in your local or global config via `[include]`
 ```
 $ git commit --amend 
 ```
-To add the staged changes to the latest commit
+To add the staged changes to the latest commit.
 
 ---
 
 # Rewriting History
 ## The catch
 
+.half-width.center[![image](img/amend_1.png)]
+
+--
+
+```
+$ git commit --amend 
+```
+.half-width.center[![image](img/amend_2.png)]
+
+???
+
 * actually copies the commits
   * also mention show reflog
 * show graph with example
+
+---
+
+# Rewriting History
+## An alternative to merging
+
+```
+$ git rebase
+```
 
 ---
 
