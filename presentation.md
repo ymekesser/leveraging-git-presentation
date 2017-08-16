@@ -291,7 +291,7 @@ To sync your changes to your main repository
 ---
 
 # Preparing your commits
-## Setting up the stage
+## Of course there's also a layer diagram
 
 Git knows three areas where your changes can be:
 
@@ -302,16 +302,57 @@ Git knows three areas where your changes can be:
 ---
 
 # Preparing your commits
-## 
+## Setting up the stage
+
+```
+$ git add <file or directory>
+````
+To add a specific file.
+
+```
+$ git add -A
+```
+Adds all unstaged files, including untracked (new) ones. 
+
+```
+$ git add -i
+```
+Opens an interactive environment to add files.
 
 ---
 
-# Committing your work
+# Preparing your commits
+## Have full control
+
+```
+$ git add -p
+```
+`-p` initiates 'patch mode'. This allows you to
+* Select which _parts_ of your changes you want to stage
+* Review your work!
+
+
+* Git slices your changes into separate 'hunks'
+* You can edit them with `e`
+  * If you want to exclude a line, just comment it out
+
+```python
++def my_new_function(a, b) {
+#+  a = a * 2;
++  return a + b;
++}
+
+```
+
+---
+
+# Preparing your commits
+## If that's too much fuss for you
 
 ```
 $ git commit -a -m "Added some stuff"
 ```
-If you want to keep it simple this time. .addendum[Note: This does not add untracked files!]
+If you want to keep it simple. .addendum[Note: This does not add untracked files!]
 
 ???
 
