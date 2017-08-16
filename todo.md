@@ -3,5 +3,7 @@
 * git bisect
 * git rebase
     * rebase -i
-* add -p
-* formatted log
+* image diff
+
+# Technical
+* make it avaiable offline
