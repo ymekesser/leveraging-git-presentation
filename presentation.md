@@ -258,6 +258,58 @@ References:
 
 ---
 
+# Tooling
+## Basic Setup
+
+My personal setup for Windows:
+* Git for Windows
+* cmder
+  * Unix-like shell based on ConEmu
+  * comes with Git for Windows
+* VS Code
+
+???
+
+TODO: Decide where to put this
+
+* Git for Windows
+  * Brings their own bash
+* cmder
+  * Looks nice
+  * Unix-commands are easier and more versatile than windows cmd
+  * Integrates better with git, which is a linux tool
+* VS Code
+  * lightweight and nice
+
+---
+
+# Tooling
+## Graphical User Interfaces
+
+* Nice to visualize History
+* Can help with some operations
+* Never as powerful or precise as the CL
+* May hide or rename operations
+* Examples:
+  * Tortoise Git
+  * Sourcetree
+
+???
+TODO: Decide where to put this
+
+* Why not GUI:
+  * Use CL at the beginning to really understand what you are doing
+  * After that, you are probably quicker in the CL already
+  * Allows for more customization
+
+* Tortoise Git
+  * Based on Tortoise SVN
+  * Looks a bit dated, but is quite powerful
+* Sourcetree
+  * By Atlassian
+
+---
+
 class: center, middle
 
 # Tips for daily use
