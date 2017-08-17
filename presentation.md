@@ -562,6 +562,33 @@ lazy-standup = !git standup | say
 ---
 
 # Adapting Git to your needs
+## Using your editor of choice
+
+You can define the default editor via the config too:
+```
+$ git config --global core.editor code
+```
+
+The same goes for individual diff/merge tools:
+```
+$ git config --global diff.tool bc3
+$ git config --global difftool.bc3.path "c:/Program Files (x86)/Beyond Compare 4/bcomp.exe"
+
+$ git config --global merge.tool bc3
+$ git config --global mergetool.bc3.path "c:/Program Files (x86)/Beyond Compare 4/bcomp.exe"
+
+```
+
+---
+
+# Adapting Git to your needs
+## Comparing images
+
+
+
+---
+
+# Adapting Git to your needs
 ## Sharing Aliases in your project
 
 Use git of course!
