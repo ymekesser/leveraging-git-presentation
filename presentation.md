@@ -393,7 +393,6 @@ $ git add -p
 #+  a = a * 2;
 +  return a + b;
 +}
-
 ```
 
 ---
@@ -405,6 +404,8 @@ $ git add -p
 $ git commit -a -m "Added some stuff"
 ```
 If you want to keep it simple. .addendum[Note: This does not add untracked files!]
+
+We will shorten this later.
 
 ???
 
