@@ -743,6 +743,7 @@ Initial state
 $ git checkout master
 $ git merge feature
 ```
+Results in a merge commit
 
 ---
 
@@ -751,7 +752,7 @@ $ git merge feature
 
 .fixed-height-300[![image](img/rebase_initial.png)]
 
-Initial state
+Let's try this again
 
 ---
 
@@ -763,9 +764,8 @@ Initial state
 ```
 $ git checkout feature
 $ git rebase master
-First, rewinding head to replay your work on top of it...
-Applying: added staged command
 ```
+Reapplies the change in `feature` onto `master`
 
 ---
 
@@ -778,17 +778,20 @@ Applying: added staged command
 $ git checkout master
 $ git merge feature
 ```
+`master` can now be _fast forwarded_ to `feature` 
+
 ---
 
 # Rewriting History
 ## Merging vs. Rebasing example
 
 .center[
-.fixed-height-200[![image](img/rebase_fastforwarded.png)]
+.fixed-height-200[![image](img/rebase_mess.png)]
 
 vs
 
-.fixed-height-200[![image](img/rebase_mess.png)]
+.fixed-height-200[![image](img/rebase_fastforwarded.png)]
+
 ]
 
 ```
