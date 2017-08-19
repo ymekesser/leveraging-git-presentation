@@ -21,16 +21,24 @@ h1+h2 {
     color: $secondary-text-color;
 }
 
-.full-width>img {
+.full-width img {
     width: 100%;
 }
 
-.full-height>img {
+.full-height img {
     height: 100%;
 }
 
-.half-width>img {
+.half-width img {
     width:50%;
+}
+
+.fixed-height-200 img {
+    height: 200px;
+}
+
+.fixed-height-300 img {
+    height: 300px;
 }
 
 .remark-code,
@@ -55,6 +63,6 @@ h1+h2 {
     width: 50%;
 }
 
-.guitar-hero>img {
+.guitar-hero img {
     height: 600px;
 }

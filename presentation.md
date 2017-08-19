@@ -57,7 +57,6 @@ $ git init
   * Release Management
 
 * In short: Source control is _essential_ for, but not limited to, multi-developer software projects.
-  * (but it is not limited to software development)
 
 ???
 A modern software project deserves a modern Source Control
@@ -311,6 +310,24 @@ TODO: Decide where to put this
 
 ---
 
+# Tooling
+## Hook your tools of choice into git
+
+You can define the default editor via the config too:
+```
+$ git config --global core.editor code
+```
+
+The same goes for individual diff/merge tools:
+```
+$ git config --global diff.tool bc
+$ git config --global difftool.bc.path "C:\Program Files\Beyond Compare 4\BComp.exe"
+```
+
+Tip: Beyond Compare lets you compare images as well
+
+---
+
 class: center, middle
 
 # Tips for daily use
@@ -401,10 +418,11 @@ $ git add -p
 # Preparing your commits
 ## If that's too much fuss for you
 
+If you want to keep it simple:
 ```
 $ git commit -a -m "Added some stuff"
 ```
-If you want to keep it simple. .addendum[Note: This does not add untracked files!]
+.addendum[Note: This does not add untracked files!]
 
 We will shorten this later.
 
@@ -461,12 +479,14 @@ Tracks the history of the code on line 42 - 50 in your file. Shows you e.g. how 
 $ git <since>..<until>
 ```
 Allows you to show commits in a range between two _commit references_.
-This is especially great to compare branches:
 
+This is especially great to compare branches:
 ```
 $ git master..feature
 ```
-Shows you the commits which are in the feature branch, but not in the master branch. .addendum[If you switch it to feature..master you will see what commits are missing from feature]
+Shows you the commits which are in the feature branch, but not in the master branch.
+
+If you switch it to `feature..master` you will see what commits are missing from feature
 
 ---
 
@@ -632,28 +652,6 @@ Then link them in your local or global config via `[include]`
 
 ---
 
-# Adapting Git to your needs
-## Hook your tools of choice into git
-
-You can define the default editor via the config too:
-```
-$ git config --global core.editor code
-```
-
-The same goes for individual diff/merge tools:
-```
-$ git config --global diff.tool bc
-$ git config --global difftool.bc.path "C:\Program Files\Beyond Compare 4/BComp.exe"
-
-$ git config --global merge.tool bc3
-$ git config --global mergetool.bc3.path "C:\Program Files\Beyond Compare 4/BComp.exe"
-
-```
-
-Tip: Beyond Compare lets you compare images as well
-
----
-
 # Rewriting History
 ## Things can get messy
 
@@ -682,7 +680,9 @@ not sure if this slide is really needed or if it should be a conclusion
 ```
 $ git commit --amend 
 ```
-To add the staged changes to the latest commit.
+To _add_ the staged changes to the latest commit.
+
+Lets you update the commit message too.
 
 ---
 
@@ -710,14 +710,99 @@ $ git commit --amend
 ## An alternative to merging
 
 ```
-$ git rebase
+$ git rebase <branch>
 ```
+
+* goes to the common ancestor
+* takes all commits which are not in `<branch>`
+* applies them on `<branch>`
+
+Primary reason: maintaining a __linear__ project history
+
+Rebasing is saying
+
+.center[ “I want to base my changes on what everybody has already done.” ]
+
+---
+
+# Rewriting History
+## Merging example
+
+.fixed-height-300[![image](img/rebase_initial.png)]
+
+Initial state
+
+---
+
+# Rewriting History
+## Merging example
+
+.fixed-height-300[![image](img/rebase_merged.png)]
+
+```
+$ git checkout master
+$ git merge feature
+```
+
+---
+
+# Rewriting History
+## Merging example
+
+.fixed-height-300[![image](img/rebase_initial.png)]
+
+Initial state
+
+---
+
+# Rewriting History
+## Rebasing example
+
+.fixed-height-300[![image](img/rebase_rebased.png)]
+
+```
+$ git checkout feature
+$ git rebase master
+First, rewinding head to replay your work on top of it...
+Applying: added staged command
+```
+
+---
+
+# Rewriting History
+## Rebasing example
+
+.fixed-height-300[![image](img/rebase_fastforwarded.png)]
+
+```
+$ git checkout master
+$ git merge feature
+```
+---
+
+# Rewriting History
+## Merging vs. Rebasing example
+
+.center[
+.fixed-height-200[![image](img/rebase_fastforwarded.png)]
+
+vs
+
+.fixed-height-200[![image](img/rebase_mess.png)]
+]
+
+```
+$ git checkout master
+$ git merge feature
+```
+
+
 
 ---
 
 class: center, middle
 
-# The bigger picure
+# The bigger picture
 
 ---
 
@@ -749,3 +834,4 @@ class: center, middle
 * [Stack Overflow Developer Survey Results 2017](https://insights.stackoverflow.com/survey/2017#overview)
 * [Tips and Tricks: Gotta Git Them All - GitHub Universe 2016](https://www.youtube.com/watch?v=LsxDxL4PYik)
 * [Git Aliases of the Gods! - Git Merge 2017](https://www.youtube.com/watch?v=3IIaOj1Lhb0)
+* [Atlassian Git Tutorials](https://www.atlassian.com/git/tutorials)
