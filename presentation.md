@@ -616,26 +616,6 @@ lazy-standup = !git standup | say
 ---
 
 # Adapting Git to your needs
-## Using your editor of choice
-
-You can define the default editor via the config too:
-```
-$ git config --global core.editor code
-```
-
-The same goes for individual diff/merge tools:
-```
-$ git config --global diff.tool bc3
-$ git config --global difftool.bc3.path "c:/Program Files (x86)/Beyond Compare 4/bcomp.exe"
-
-$ git config --global merge.tool bc3
-$ git config --global mergetool.bc3.path "c:/Program Files (x86)/Beyond Compare 4/bcomp.exe"
-
-```
-
----
-
-# Adapting Git to your needs
 ## Sharing Aliases in your project
 
 Use git of course!
@@ -653,35 +633,24 @@ Then link them in your local or global config via `[include]`
 ---
 
 # Adapting Git to your needs
-## Comparing images
+## Hook your tools of choice into git
 
-What if you want to compare images?
-
-[ImageMagick](https://www.imagemagick.org/)
-
+You can define the default editor via the config too:
 ```
-$ touch .gitattributes
-$ git config core.attributesfile '.gitattributes'
+$ git config --global core.editor code
 ```
 
+The same goes for individual diff/merge tools:
 ```
-$ cat .gitattributes 
-*.gif diff=image
-*.jpg diff=image
-*.png diff=image
-```
+$ git config --global diff.tool bc
+$ git config --global difftool.bc.path "C:\Program Files\Beyond Compare 4/BComp.exe"
+
+$ git config --global merge.tool bc3
+$ git config --global mergetool.bc3.path "C:\Program Files\Beyond Compare 4/BComp.exe"
 
 ```
-$ git config diff.image.command './tools/git-imgdiff'
-```
 
-.addendum[Source: http://www.akikoskinen.info/image-diffs-with-git/]
-.addendum[For macos: https://github.com/ewanmellor/git-diff-image]
-
-???
-* ImageMagick:
-  * A Unix tool to create, edit, compose, or convert bitmap images.
-  * Commandline interface and various API, incl. .Net, Java and Python 
+Tip: Beyond Compare lets you compare images as well
 
 ---
 

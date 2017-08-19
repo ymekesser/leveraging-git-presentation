@@ -1,2 +1,2 @@
 #!/bin/sh
-magick compare $2 $1 png:- | magick montage -geometry +4+4 $2 - $1 png:- | magick display -title "$1" -
+magick compare $2 $1 png:- | magick montage -geometry +4+4 $2 - $1 png:test.png
