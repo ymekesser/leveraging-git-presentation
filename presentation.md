@@ -663,18 +663,6 @@ Then link them in your local or global config via `[include]`
 ---
 
 # Rewriting History
-## The history is written by winners
-
-* Changing your log is actually encouraged!
-* Git offers powerful tools to do so
-* Important: only update the history of your __private__ branches
-
-???
-not sure if this slide is really needed or if it should be a conclusion
-
----
-
-# Rewriting History
 ## Erasing your mistakes
 
 ```
@@ -886,6 +874,37 @@ a5f4a0d   JRA-123 added some documentation
 ```
 
 ???
+
+* Also allows you to reorder commits!
+
+---
+
+# Rewriting History
+## The history is written by winners
+
+Changing your log is actually encouraged!
+
+Git offers powerful tools to do so:
+  * `git commit --amend`
+  * `git rebase`
+  * `git rebase -i`
+
+This allows you to get rid of all those _"added comment"_, _"fixed typo"_, _"stylecop"_ commits
+
+Important: only update the history of your __private__ branches
+
+???
+
+Git offers powerful tools to do so:
+  * Amending commits with `git commit --amend`
+  * Rebasing your branch onto another one with `git rebase`
+  * Shaping your history with `git rebase -i`
+
+Get rid of all the clutter in your history
+This makes it easier to
+  * understand your projects history
+  * undo features
+  * find bugs
 
 ---
 
