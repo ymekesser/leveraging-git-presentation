@@ -799,7 +799,93 @@ $ git checkout master
 $ git merge feature
 ```
 
+???
 
+* Let's say you wanted to merge master into feature first
+  * to sync them
+  * to be able to integrate on your branch
+  * this results in a huge mess
+* rebase is easy
+  * it just takes what you did
+  * and it applies it somewhere else
+* note: you can still have merge conflicts
+
+---
+
+# Rewriting History
+## Interactive Rebase: Refactor your history
+
+```
+$ git rebase -i HEAD~3
+```
+
+```
+pick f7f3f6d JRA-123 set up basic skeleton
+pick 310154e JRA-123 implemented parts of the feature
+pick a5f4a0d JRA-123 added some documentation
+
+# Rebase 710f0f8..a5f4a0d onto 710f0f8
+#
+# Commands:
+#  p, pick = use commit
+#  r, reword = use commit, but edit the commit message
+#  e, edit = use commit, but stop for amending
+#  s, squash = use commit, but meld into previous commit
+#  f, fixup = like "squash", but discard this commit's log message
+#  x, exec = run command (the rest of the line) using shell
+#
+# These lines can be re-ordered; they are executed from top to bottom.
+#
+# If you remove a line here THAT COMMIT WILL BE LOST.
+#
+# However, if you remove everything, the rebase will be aborted.
+#
+# Note that empty commits are commented out
+```
+
+???
+
+* git hides some of its most powerful features behind just one small option
+* git rebase -i HEAD~3
+  * rebases HEAD~3 onto HEAD
+  * just use HEAD~n if you want to edit the last n commits
+  * opens an editor window
+* you can edit this like a script now
+* this script runs from top to bottom
+
+---
+
+# Rewriting History
+## Interactive Rebase: Example
+
+```
+pick    f7f3f6d   JRA-123 set up basic skeleton
+reword  310154e   JRA-123implemented the feeture
+edit    a5f4a0d   JRA-123 added some documentation
+pick    98fea92   JRA-123 started with some performance improvements
+squash  21aa923   JRA-123 finished performance improvements
+pick    9e18af3   JRA-123 refactored the main class
+fixup   872fd88   JRA-123 fixed bug introduced during refactoring
+
+# Rebase 710f0f8..872fd88 onto 710f0f8
+#
+# Commands:
+#  p, pick = use commit
+#  r, reword = use commit, but edit the commit message
+#  e, edit = use commit, but stop for amending
+#  s, squash = use commit, but meld into previous commit
+#  f, fixup = like "squash", but discard this commit's log message
+```
+
+```
+f7f3f6d   JRA-123 set up basic skeleton
+310154e   JRA-123 implemented the feature
+a5f4a0d   JRA-123 added some documentation
+98fea92   JRA-123 performance improvements
+9e18af3   JRA-123 refactored the main class
+```
+
+???
 
 ---
 
