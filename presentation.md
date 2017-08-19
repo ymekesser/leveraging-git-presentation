@@ -293,6 +293,7 @@ TODO: Decide where to put this
 * Examples:
   * Tortoise Git
   * Sourcetree
+* Note: git comes with gitk
 
 ???
 TODO: Decide where to put this
@@ -358,7 +359,7 @@ Git knows three areas where your changes can be:
 
 ```
 $ git add <file or directory>
-````
+```
 To add a specific file.
 
 ```
@@ -635,13 +636,6 @@ $ git config --global mergetool.bc3.path "c:/Program Files (x86)/Beyond Compare 
 ---
 
 # Adapting Git to your needs
-## Comparing images
-
-
-
----
-
-# Adapting Git to your needs
 ## Sharing Aliases in your project
 
 Use git of course!
@@ -655,6 +649,39 @@ Then link them in your local or global config via `[include]`
 ```
 
 .addendum[Note: do not include random stuff - it's code you execute locally]
+
+---
+
+# Adapting Git to your needs
+## Comparing images
+
+What if you want to compare images?
+
+[ImageMagick](https://www.imagemagick.org/)
+
+```
+$ touch .gitattributes
+$ git config core.attributesfile '.gitattributes'
+```
+
+```
+$ cat .gitattributes 
+*.gif diff=image
+*.jpg diff=image
+*.png diff=image
+```
+
+```
+$ git config diff.image.command './tools/git-imgdiff'
+```
+
+.addendum[Source: http://www.akikoskinen.info/image-diffs-with-git/]
+.addendum[For macos: https://github.com/ewanmellor/git-diff-image]
+
+???
+* ImageMagick:
+  * A Unix tool to create, edit, compose, or convert bitmap images.
+  * Commandline interface and various API, incl. .Net, Java and Python 
 
 ---
 
