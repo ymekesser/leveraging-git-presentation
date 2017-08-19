@@ -819,12 +819,6 @@ class: center, middle
 # Further pointers
 
 ---
-# todo
-
-* git man pages and documentation
-  * show format for rebase and merge
-
----
 
 # Links
 * Official Website: https://git-scm.com
