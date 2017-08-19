@@ -924,6 +924,34 @@ class: center, middle
 # Further pointers
 
 ---
+# Further pointers
+## Just a dump of some more stuff
+
+`git rerere`
+  * lets you record changes you made during merges and applies them automatically the next time
+
+`git filter-branch`
+  * lets you scrub the entire history
+  * useful if you e.g. want to
+    * remove a file from the entire history
+    * change an authors email adress globally 
+
+Git LFS
+  * An extension for versioning large files
+  * If you need to store huge assets in your repository
+
+???
+
+* git rerere
+  * useful if you rebase a lot
+* filter-branch
+  * be cautios with that
+* git lfs
+  * replaces files with text pointers and stores the file contents on a remote server
+  * e.g. large files such as audio samples, videos, datasets, and graphic
+  * also huge data sets in data science
+
+---
 
 # Links
 * Official Website: https://git-scm.com
