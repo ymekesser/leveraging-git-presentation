@@ -1141,8 +1141,6 @@ __Hotfix__ branches off `master` to patch production releases
 
 # GitFlow
 ## Conclusion
-.full-width[![image](img/gitflow_5.png)]
-
 Very strict and robust, but can be hard to follow.
 
 Can be more complex than you need
@@ -1151,12 +1149,34 @@ Can be more complex than you need
 
 Feel free to tailor it to _your_ project
 
+.full-width[![image](img/gitflow_5.png)]
+
 ???
 Don't be afraid to adopt some aspects of the workflow and disregard others
 
 E.g. the master branch is kinda redundant, if you don't need to build from it you can also tag `develop`
 
+---
 
+# Forking Workflow
+## Going fully distributed
+
+On a developer level .addendum[(the Open Source approach)]
+  * Every developer has his own server-side repository
+  * _Only_ project maintainer can push to the official repository
+
+On a supplier level
+  * Project team works on the official repository
+  * Suppliers have their forks,no write-access to offical repository
+  * Project team pulls work from Suppliers after reviewing them
+
+.fixed-height-300.center[![image](img/forking_workflow.png)]
+
+???
+
+* allows maintainer to accept commits from any developer without giving them write access to the official codebase
+
+ 
 ---
 
 # The bigger picture
