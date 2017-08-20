@@ -1060,12 +1060,102 @@ Protip: Use your CI infrastructure to build and test feature branches too.
 # GitFlow
 ## A way to make modern software development manageable
 
-- pro: very clear rules
+A strict branching model created by [Vincent Driessen](http://nvie.com/posts/a-successful-git-branching-model/)
+* Designed around releases
+* No new concepts or commands 
+* Robust for managing larger projects
 
-contra:
-  * hard for developers
-  * history can result in a mess
-  * overly complex
+---
+
+# GitFlow
+## Example
+
+.full-width[![image](img/gitflow_1.png)]
+
+Two eternal branches:
+* __`master`__: The 'official' release history
+  * Contains only merge commits
+  * Each commit is tagged with a version
+  
+* __`develop`__: Integration branch for features
+  
+
+???
+
+* You could deploy the current release at any time from master
+* You'd had a nightly build on develop
+
+---
+
+# GitFlow
+## Example
+
+.full-width[![image](img/gitflow_2.png)]
+
+Development happens in __feature branches__ off `develop`.
+
+Merge back into `develop` with
+```
+$ git checkout develop
+$ git merge --no-ff myFeature
+```
+
+???
+
+The interaction between develop and feature branches is just the feature branches workflow described before
+Note: Feature branches can also 'skip' a version, no problem
+
+---
+
+# GitFlow
+## Example
+
+.full-width[![image](img/gitflow_3.png)]
+
+When a release is approaching, a __release branch__ is created
+  * Only bugfixing and documentation is done on there
+  * When done, merge release into `master` and back into `develop`
+
+???
+
+* Once develop has acquired enough features for a release you fork a release branch
+* branch is for stabilizing the release, make it ready, without development interfering
+* Of course you can (or even should) develop bugfixes in their own feature branches
+* makes it possible for one team to polish the current release while another works on new features
+---
+
+# GitFlow
+## Example
+
+.full-width[![image](img/gitflow_4.png)]
+
+__Hotfix__ branches off `master` to patch production releases
+  * Once done, it is merged into `master` and `develop`
+
+???
+* similar to a release branch for master
+* this way, urgent fixes do not block development
+* no need to wait for the next release cycle
+
+---
+
+# GitFlow
+## Conclusion
+.full-width[![image](img/gitflow_5.png)]
+
+Very strict and robust, but can be hard to follow.
+
+Can be more complex than you need
+  * E.g. master branch is kinda redundant
+  * History tends to become very complicated
+
+Feel free to tailor it to _your_ project
+
+???
+Don't be afraid to adopt some aspects of the workflow and disregard others
+
+E.g. the master branch is kinda redundant, if you don't need to build from it you can also tag `develop`
+
 
 ---
 
