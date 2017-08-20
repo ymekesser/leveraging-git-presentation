@@ -1069,6 +1069,17 @@ contra:
 
 ---
 
+# The bigger picture
+## Conclusion
+
+Git allows for a variety of Workflows
+
+There is no one-size-fits-all
+
+Think about what fits your team and project
+
+---
+
 class: center, middle
 
 # Further pointers
