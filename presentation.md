@@ -914,16 +914,55 @@ class: center, middle
 
 ---
 
-# The bigger picture
-## Centralized Workflow
+# Centralized Workflow
+## A good start
 
-* You have a central repository
-* You have one development branch `master`
+* One central repository
+* Only one development branch `master`
 * Devs clone the central repository
 * They make local commits etc.
 * Changes are rebased onto `origin/master`, then pushed
 
-Good for teams coming from a centralized VCS
+```
+$ git pull --rebase origin master
+```
+
+---
+
+# Centralized Workflow
+## Example
+
+.full-width[![image](img/centralized_workflow_1.png)]
+
+---
+
+# Centralized Workflow
+## Example
+
+.full-width[![image](img/centralized_workflow_2.png)]
+
+---
+
+# Centralized Workflow
+## Example
+
+.full-width[![image](img/centralized_workflow_3.png)]
+
+---
+
+# Centralized Workflow
+## Example
+
+.full-width[![image](img/centralized_workflow_4.png)]
+
+---
+
+# Centralized Workflow
+## Conclusion
+
+Ideal for teams coming from a centralized VCS
+* Requires only a handful of commands
+* Only one main branch (or _trunk_)
 * Results in a linear history
 
 Advantages over SVN/TFS:
@@ -932,31 +971,89 @@ Advantages over SVN/TFS:
 
 ---
 
-# The bigger picture
-## Centralized Workflow: Example
+# Feature Branches
+## Streamline communication between developers
 
-.full-width[![image](img/centralized_workflow_1.png)]
+Feature development only on dedicated branches instead of the master
+  * Feature branches can be pushed anytime
+
+When a feature is done, create a _Pull Request_
+  * Like _"Please pull my changes into master"_
+
+Only when reviewed and accepted, merge it into master
+
+<br>
+__Pull Requests__:
+  * Not a Git feature per se
+  * Use Gerrit, Bitbucket, Github etc.
+
+???
+
+Feature branches are the logical next step
+
+One of the most important workflows
+
+Feature branches can be pushed anytime
+  * so you get a backup for free
+  * makes it easy to share code
 
 ---
 
-# The bigger picture
-## Centralized Workflow: Example
+# Feature Branches
+## Example
 
-.full-width[![image](img/centralized_workflow_2.png)]
+.full-width[![image](img/feature_branches_1.png)]
 
----
+???
 
-# The bigger picture
-## Centralized Workflow: Example
-
-.full-width[![image](img/centralized_workflow_3.png)]
+no separate client/server view, because the repository can be synced at any time
 
 ---
 
-# The bigger picture
-## Centralized Workflow: Example
+# Feature Branches
+## Example
 
-.full-width[![image](img/centralized_workflow_4.png)]
+.full-width[![image](img/feature_branches_2.png)]
+
+---
+
+# Feature Branches
+## Example
+
+.full-width[![image](img/feature_branches_3.png)]
+
+Feature branch is _merged_ into `master`
+
+---
+
+# Feature Branches
+## Example
+
+.full-width[![image](img/feature_branches_4.png)]
+
+Alternatively: Feature branch is _rebased_ onto `master`
+
+???
+
+Pro: You have a more linear history on master
+Contra: You have more commits on master, can't revert features as easily
+
+---
+
+# Feature Branches
+## Conclusion
+
+Feature branches offer lots of benefits:
+  * Work on features never disturbes the main code base
+  * `master` never contains broken or unfinished features
+  * Easy to work on two features in parallel
+  * Sharing WIP features without touching the official code base
+  * Allow for pull requests, which are great for code reviews
+
+Tip: Use descriptive names incl. issue number
+E.g. JRA-123-log-out-function
+
+Protip: Use your CI infrastructure to build and test feature branches too.
 
 ---
 
