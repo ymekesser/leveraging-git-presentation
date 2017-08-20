@@ -914,8 +914,61 @@ class: center, middle
 
 ---
 
+# The bigger picture
+## Centralized Workflow
+
+* You have a central repository
+* You have one development branch `master`
+* Devs clone the central repository
+* They make local commits etc.
+* Changes are rebased onto `origin/master`, then pushed
+
+Good for teams coming from a centralized VCS
+* Results in a linear history
+
+Advantages over SVN/TFS:
+* Every developer has his own local copy of the project
+* Profit from Git's robust branching and merging model
+
+---
+
+# The bigger picture
+## Centralized Workflow: Example
+
+.full-width[![image](img/centralized_workflow_1.png)]
+
+---
+
+# The bigger picture
+## Centralized Workflow: Example
+
+.full-width[![image](img/centralized_workflow_2.png)]
+
+---
+
+# The bigger picture
+## Centralized Workflow: Example
+
+.full-width[![image](img/centralized_workflow_3.png)]
+
+---
+
+# The bigger picture
+## Centralized Workflow: Example
+
+.full-width[![image](img/centralized_workflow_4.png)]
+
+---
+
 # GitFlow
 ## A way to make modern software development manageable
+
+- pro: very clear rules
+
+contra:
+  * hard for developers
+  * history can result in a mess
+  * overly complex
 
 ---
 
