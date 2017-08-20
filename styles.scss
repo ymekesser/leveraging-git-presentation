@@ -1,6 +1,10 @@
 $secondary-text-color: #444;
 body {
     font-family: 'Droid Serif';
+    
+    .remark-slide-content {
+        padding: 2em;
+    }
 }
 
 h1,
@@ -10,10 +14,18 @@ h3 {
     font-weight: normal;
 }
 
+h1 {
+    margin-top:0;
+}
+
 h1+h2 {
     margin-top: -1em;
     font-size: 35px !important;
     color: $secondary-text-color;
+}
+
+p+ul {
+    margin-top: -1em;
 }
 
 .addendum {
