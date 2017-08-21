@@ -15,17 +15,20 @@ name: agenda
   * History
   * Fundamentals
 3. Tips for daily use
+  * Preparing your commits<br>
+    `git add`, `git commit`
   * Digging in the past <br>
     `git log`
-  * Preparing <br>
-    `git status`, `git add`
+  * Adapting Git to your needs <br>
+    `git config`
   * Rewriting History <br>
     `git commit --amend`, `git rebase`
 4. The bigger picture
+  * Centralized Workflow
+  * Feature Branches
   * GitFlow
-  * rebase vs merge
+  * Forking Workflow
 5. Further pointers
-  * Git LFS
 
 ---
 
