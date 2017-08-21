@@ -479,13 +479,13 @@ Tracks the history of the code on line 42 - 50 in your file. Shows you e.g. how 
 ## Comparing your branches
 
 ```
-$ git <since>..<until>
+$ git log <since>..<until>
 ```
 Allows you to show commits in a range between two _commit references_.
 
 This is especially great to compare branches:
 ```
-$ git master..feature
+$ git log master..feature
 ```
 Shows you the commits which are in the feature branch, but not in the master branch.
 
@@ -785,12 +785,11 @@ vs
 
 ]
 
-```
-$ git checkout master
-$ git merge feature
-```
-
 ???
+
+TODO: The graphic in this slide is wrong
+feature is at the wrong place
+master would get fastforwarded to E 
 
 * Let's say you wanted to merge master into feature first
   * to sync them
@@ -920,15 +919,18 @@ class: center, middle
 # Centralized Workflow
 ## A good start
 
+Git can be used similar to a centralized VCS:
 * One central repository
 * Only one development branch `master`
 * Devs clone the central repository
 * They make local commits etc.
 * Changes are rebased onto `origin/master`, then pushed
 
+To keep history linear, always pull with
 ```
 $ git pull --rebase origin master
 ```
+.addendum[You want to "add your changes to what they already did"]
 
 ---
 
@@ -937,6 +939,9 @@ $ git pull --rebase origin master
 
 .full-width[![image](img/centralized_workflow_1.png)]
 
+???
+initial state, we just cloned the central repository
+repository has only a master branch
 ---
 
 # Centralized Workflow
@@ -944,6 +949,11 @@ $ git pull --rebase origin master
 
 .full-width[![image](img/centralized_workflow_2.png)]
 
+???
+Some work was done on the master in the central repository
+We fetched those, they are reflected on origin/master
+
+meanwhile, we also did some local work ourselves
 ---
 
 # Centralized Workflow
@@ -951,12 +961,20 @@ $ git pull --rebase origin master
 
 .full-width[![image](img/centralized_workflow_3.png)]
 
+???
+instead of merging into origin/master, we rebase our work on it.
+
+the last two steps can be achieved with `git pull --rebase`
+
 ---
 
 # Centralized Workflow
 ## Example
 
 .full-width[![image](img/centralized_workflow_4.png)]
+
+???
+when we push, master will be fast forwarded
 
 ---
 
@@ -999,6 +1017,10 @@ One of the most important workflows
 Feature branches can be pushed anytime
   * so you get a backup for free
   * makes it easy to share code
+
+Pull requests make code reviews convenient
+  * you can look at the feature as a whole (by diffing it to `master`)
+  * anybody, e.g. the reviewer, can merge it when done, not only the dev who created it
 
 ---
 
@@ -1108,6 +1130,8 @@ $ git merge --no-ff myFeature
 The interaction between develop and feature branches is just the feature branches workflow described before
 Note: Feature branches can also 'skip' a version, no problem
 
+The no-ff part is critizised by some, rebasing is an alternative
+
 ---
 
 # GitFlow
@@ -1170,8 +1194,8 @@ On a developer level .addendum[(the Open Source approach)]
 
 On a supplier level
   * Project team works on the official repository
-  * Suppliers have their forks,no write-access to offical repository
-  * Project team pulls work from Suppliers after reviewing them
+  * Suppliers have their forks, no write-access to offical repository
+  * Project team pulls work from suppliers after reviewing them
 
 .fixed-height-300.center[![image](img/forking_workflow.png)]
 
@@ -1189,7 +1213,7 @@ Git allows for a variety of Workflows
 
 There is no one-size-fits-all
 
-Think about what fits your team and project
+Think about what fits _your_ team and project
 
 ---
 
