@@ -584,7 +584,7 @@ Tip: Wrap more complex commands into a shell function:
 [alias]
 bclean = "!f() {
     git branch --merged ${1-master} 
-    | grep -v " ${1-master}$" 
+    | grep -v \" ${1-master}$\" 
     | xargs -r git branch -d; }; f"
 ```
 This cleans up all merged branches.
@@ -600,6 +600,39 @@ This cleans up all merged branches.
   * $n is the nth argument
   * note that $0 is the script itself
   * ${1-master} means that the default value for the first argument is "master"
+
+---
+
+# Adapting Git to your needs
+## Aliases for providing structure
+
+Aliases for (semantic commit messages)[https://seesparkbox.com/foundry/semantic_commit_messages] including Issue ID:
+```
+[alias]
+feat     = "!f() { git commit -m \"$1 - feat: $2\" }; f"
+docs     = "!f() { git commit -m \"$1 - docs: $2\" }; f"
+chore    = "!f() { git commit -m \"$1 - chore: $2\" }; f"
+fix      = "!f() { git commit -m \"$1 - fix: $2\" }; f"
+refactor = "!f() { git commit -m \"$1 - refactor: $2\" }; f"
+```
+
+```
+$ git chore JRA-123 "updated build script"
+[master 2ff195d] JRA-123 - chore: updated build script
+```
+
+???
+
+Semantic commit messages:
+  * Add the type of task you did to your commit messages
+  * Goal: Don't mix different tasks into commits
+    * E.g. bugfixes and features shouldn't be in one commit
+
+Having the Issue Id in there is always a good idea
+
+Could be more sophisticated of course
+If one thinks this further, maybe you could parse the issue id from the feature branch
+
 ---
 
 # Adapting Git to your needs
