@@ -407,8 +407,9 @@ TODO: Decide where to put this
 
 You can define the default editor via the config too:
 ```
-$ git config --global core.editor code
+$ git config --global core.editor code --wait
 ```
+`--wait` flag is needed with VS Code, otherwise the window will close right again
 
 The same goes for individual diff/merge tools:
 ```
