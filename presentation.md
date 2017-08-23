@@ -234,14 +234,16 @@ class: center, middle
 
 ---
 
-# Git in a nutshell
+# Fundamentals
+## Git in a nutshell
 
 * History: A one-direction graph
 * Git: A set of tools to manipulate it
 
 ---
 
-# Primitives
+# Fundamentals
+## Primitives
 
 Data structures:
   * _blob_: content of a file
@@ -257,6 +259,93 @@ References:
   * _remotes_: Refers to an object in a remote repository
   * _stash_: Refers to an uncommitted object
   * _tags_: Refers to a fixed point in history
+
+---
+
+# Fundamentals
+## Commit
+
+A commit is a tuple from:
+* tree, message, author, timestamp, parent
+
+```
+commit 85e3c6ee48468ed813681aadcb7a2dfa28a82b47
+Author: Yacine Mekesser <ymekesser@hotmail.com>
+Date:   Sun Aug 20 15:04:45 2017 +0200
+
+    created an example for a centralized workflow
+```
+
+```
+$ git cat-file 85e3c6ee48468ed813681aadcb7a2dfa28a82b47 -p
+tree 1dcd8b30d71a3e377753b63c67569090b6b8e715
+parent 215b494bb1572a3b3895c72edfd35dac30afab7e
+author Yacine Mekesser <ymekesser@hotmail.com> 1503234285 +0200
+committer Yacine Mekesser <ymekesser@hotmail.com> 1503234285 +0200
+
+created an example for a centralized workflow
+```
+
+The commits SHA-1 hash is hashed over the whole content
+This means that
+* When the content changes, the hash changes
+
+---
+
+# Fundamentals
+## Example
+
+.fixed-height-300[![image](img/fundamental_example_1.png)]
+
+```
+$ git checkout master
+```
+
+---
+
+# Fundamentals
+## Example
+
+.fixed-height-300[![image](img/fundamental_example_2.png)]
+
+```
+$ git commit
+```
+
+* Checked out branch follows new commits
+* `HEAD` follows checked out branch
+
+---
+
+# Fundamentals
+## Example
+
+.fixed-height-300[![image](img/fundamental_example_3.png)]
+
+```
+git reset C
+```
+* Branch gets set back to `C`
+* `HEAD` still follows checked out branch
+* Note: `D` does still exist
+
+---
+
+# Fundamentals
+## Example
+
+.fixed-height-300[![image](img/fundamental_example_4.png)]
+
+```
+$ git checkout B
+```
+* Commits can be checked too
+* This leads to a _detached HEAD state_
+
+---
+
+# Fundamentals
+## Reflog: The saviour of lives
 
 ---
 
