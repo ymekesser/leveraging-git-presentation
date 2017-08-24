@@ -1,13 +1,7 @@
 @import '_font-faces';
-
 $secondary-text-color: #444;
-
 body {
     font-family: 'Droid Sans';
-    
-    .remark-slide-content {
-        padding: 2em;
-    }
 }
 
 h1,
@@ -17,8 +11,17 @@ h3 {
     font-weight: normal;
 }
 
+.remark-code,
+.remark-inline-code {
+    font-family: 'Ubuntu Mono';
+}
+
+.remark-slide-content {
+    padding: 2em;
+}
+
 h1 {
-    margin-top:0;
+    margin-top: 0;
 }
 
 h1+h2 {
@@ -45,7 +48,7 @@ p+ul {
 }
 
 .half-width img {
-    width:50%;
+    width: 50%;
 }
 
 .fixed-height-200 img {
@@ -54,11 +57,6 @@ p+ul {
 
 .fixed-height-300 img {
     height: 300px;
-}
-
-.remark-code,
-.remark-inline-code {
-    font-family: 'Ubuntu Mono';
 }
 
 .title-logo img {
