@@ -263,18 +263,9 @@ References:
 ---
 
 # Fundamentals
-## Commit
+## A Commit under the microscope
 
-A commit is a tuple from:
-* tree, message, author, timestamp, parent
-
-```
-commit 85e3c6ee48468ed813681aadcb7a2dfa28a82b47
-Author: Yacine Mekesser <ymekesser@hotmail.com>
-Date:   Sun Aug 20 15:04:45 2017 +0200
-
-    created an example for a centralized workflow
-```
+A commit is a structure containing a tree, message, author, timestamp, parent
 
 ```
 $ git cat-file 85e3c6ee48468ed813681aadcb7a2dfa28a82b47 -p
@@ -287,8 +278,28 @@ created an example for a centralized workflow
 ```
 
 The commits SHA-1 hash is hashed over the whole content
-This means that
-* When the content changes, the hash changes
+
+Git makes sure that __anything you committed is save__
+
+1. A commit is defined and adressed by its hash
+2. The hash changes if _anything_ in the commit changes
+3. Commits are not deleted *
+
+There are only two potentially destructive commands:
+
+`git reset --hard` and `git checkout`
+
+.addendum[\* Unreachable commits do eventually get garbage collected]
+
+???
+
+anything you committed is save
+* this is important
+* git makes it incredibly hard to mess things up
+  * there are only a few destructive operations, and they all discard only changes in your work dir
+  * reset --hard, checkout
+
+This means that no matter what changes, the commit receives a new ID
 
 ---
 
@@ -346,6 +357,45 @@ $ git checkout B
 
 # Fundamentals
 ## Reflog: The saviour of lives
+
+The __Reflog__ is a log of all operations performed in a repository.
+
+```
+$ git reflog
+
+05ca429 HEAD@{11}: rebase -i (finish): returning to refs/heads/master
+05ca429 HEAD@{12}: rebase -i (pick): test: fixed some unit tests
+51c02dc HEAD@{13}: rebase -i (squash): refactor: removed unnecessary imports and variables
+caa3df9 HEAD@{14}: rebase -i (start): checkout HEAD~5
+65586a3 HEAD@{15}: rebase -i (finish): returning to refs/heads/master
+65586a3 HEAD@{16}: rebase -i (start): checkout HEAD~5
+65586a3 HEAD@{17}: rebase -i (finish): returning to refs/heads/master
+65586a3 HEAD@{18}: rebase -i (start): checkout HEAD~5
+65586a3 HEAD@{19}: commit: removed TODO
+cc71c4c HEAD@{20}: commit: test: fixed some unit tests
+caa3df9 HEAD@{21}: commit: refactor: removed unnecessary imports
+ec563bf HEAD@{22}: reset: moving to HEAD~1
+79a1c6f HEAD@{23}: commit: refactor: removed unnecessary imports
+ec563bf HEAD@{24}: commit: refactor: Minor refactorings
+f2f056f HEAD@{25}: commit: chore: added tslint rules to find unused code
+```
+
+It logs the commit in which the operation _ended_ too, so you can reset to it anytime:
+
+```
+$ git reset 65586a3
+```
+
+???
+
+If you take one thing away from this presentation, then it's this.
+
+No matter what you did, you find it in the reflog
+
+Remember: when you reset to a commit, it will restore the WHOLE PROJECT to exactly this state,
+INCLUDING the history. This is the magical part of the Hash id. As it hashes over the parent too,
+and the parent over its parent etc., you just need to know the hash of a commit and this includes not 
+only the change but everything which came before too.
 
 ---
 
@@ -504,6 +554,12 @@ $ git add -p
 #+  a = a * 2;
 +  return a + b;
 +}
+```
+
+You can also partially unstage:
+
+```
+$ git reset -p
 ```
 
 ---
@@ -1376,6 +1432,7 @@ Git LFS
 
 # Links
 * Official Website: https://git-scm.com
+* Interactive branching tutorial & sandbox: http://learngitbranching.js.org
 
 ---
 
