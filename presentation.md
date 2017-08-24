@@ -228,6 +228,12 @@ So you should probably use it!
 
 ---
 
+The problem...
+
+.full-width[![image](img/git_is_a_nightmare.png)]
+
+---
+
 class: center, middle
 
 # Fundamentals
