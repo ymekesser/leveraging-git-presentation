@@ -2,19 +2,19 @@ name: title
 class: center, middle
 
 # Leveraging Git
+
 ## for your development workflow
+
 .title-logo[![Right-aligned image](img\Git-Icon-1788C.png)]
 
 ---
 
 name: agenda
+
 # Agenda
 
-1. Introduction
-2. A bit about Git
-  * History
-  * Fundamentals
-3. Tips for daily use
+1. Advanced tips for daily use
+  * Tooling
   * Preparing your commits<br>
     `git add`, `git commit`
   * Digging in the past <br>
@@ -23,438 +23,16 @@ name: agenda
     `git config`
   * Rewriting History <br>
     `git commit --amend`, `git rebase`
-4. The bigger picture
+  * Don't Panic <br>
+    `git reflog`
+
+2. The bigger picture
   * Centralized Workflow
   * Feature Branches
   * GitFlow
   * Forking Workflow
-5. Further pointers
 
----
-
-class: middle
-
-What are the 3 most important tools for modern software development?
-
-???
-
-* Editor
-* Source Control
-  * .addendum[also known as: Version Control, Revision Control, Source Control Managment]
-* Build infrastructure
-
----
-
-# Introduction
-
-```
-$ git init
-```
-
-<br>
-
-* Professional software development relies on source control
-* Especially for
-  * Big teams
-  * Agile development
-  * Release Management
-
-* In short: Source control is _essential_ for, but not limited to, multi-developer software projects.
-
-???
-A modern software project deserves a modern Source Control
-
----
-
-class: center, middle
-
-# A bit 'bout git
-
----
-
-# History
-## The dark, centralized ages
-
-* Concurrent Versions System (CVS), 1990
-  * Was very widespread, esp. in OSS community
-* Subversion (SVN), 2000
-  * “CVS done right”
-* Visual Source Safe (VSS), 2005
-  * File locks, occasionally corrupts files
-* Team Foundation Server (TFS), 2006
-  * SVN but you have to pay for it
-
-???
-
-* CVS Development stopped in 2008
-* SVN tried to fix mistakes from CVS, but failed to update its broken core principles
-* VSS was hell
-* TFS is more than Source Control. Huge step from VSS, but __TFVC__ is still bad, makes the same mistakes as SVN.
-  * Also: the default Source Control for TFS is now git.
----
-
-# History
-## The distributed age
-
-* Bitkeeper, 2000
-  * Proprietary, but was used for Linux kernel
-* **Git**, 2005
-  * Developed by Linus Torvalds to replace Bitkeeper
-* Mercurial, 2005
-  * Also tried to replace Bitkeeper for Linux. Now used e.g. by Facebook and Mozilla
-* Bazaar, 2005
-  * A mix of distributed and centralized concepts
-
-???
-
-* The first three are all a bit related.
-* Bitkeeper was proprietary, but a free community version existed and was catered for linux
-  * Bitkeeper finally became Open Source in 2016
-* There were concerns about using proprietary software for a flagship OSS project.
-  * Torvalds was not quite happy with Bitkeeper anyway and decided to "do it right"
-* At the same time, Matt Mackall implemented Mercurial for use with the Linux Kernel
-  * Technically, the systems are quite similar
-* Mercurial vs. Git was a holy war in hacker culture
-  * In the end, the Linux Kernel Project chose Git.
-
-* Mercurial:
-  Mozilla, Facebook
-
-
----
-
-# Distributed Source Control
-## Concepts
-
-* Peer-to-peer approach instead of single, central repository
-* Every clients copy is a complete repository, including full History
-  * You can still have a 'main' repository - but its not different from your local one
-* Common operations are local
-* Communication is only necessary when sharing changes amongst peers.
-
-.full-width[![Centered image](img/centralized_vs_distributed.PNG)]
-
----
-
-# Distributed Source Control
-## Benefits
-
-* Obvious benefit: Offline Working
-* Improves collaboration
-  * Commit changes without disturbing others
-  * Branching is inherent
-* Performance
-  * Operations are local
-
-???
-
-* Offline Working:
-  * Be in a plane or wherever, you can access the whole log, commit, etc
-  * But it's much more
-
-* Collaboration:
-  * Not talking about feature branches. Everybody has his own branch by design, branched from the origin one.
-  * Branching is more inherent when being distributed
-
-* Performance:
-  * SC should help you, not slow you down. So it _has_ to be fast.
-
----
-
-# Distributed Source Control
-## Benefits
-
-* Trust
-  * You can trust your data
-    * Without trusting everybody else
-    * Without trusting your hosting
-* Release Engineering
-  * Managing versions was never easier
-* Security
-  * No single point of failure
-  * Natural data replication
-  * Everything is checksummed
-  * Keep your master copy behind 3 firewalls
-
-???
-
-* Trust:
-  * You are the master of your repository
-  * People can have read access and do their work incl. branching and commit - but they can't read
-  * Which hoster would you trust the _master copy_ of your source code with?
-
-* Security
-  * SHA-1 is not as secure anymore
-  * The hash is mostly a consistency feature, but has security benefits
-
----
-
-# What Professional Developers use in 2017
-![image](img/version_control_so_survey.PNG)
-
-.addendum[Source: Stack Overflow Developer Survey 2017]
-
----
-
-# Who uses Git
-
-Some important players:
-* Linux Kernel project
-* Google
-* facebook
-* Microsoft is migrating Microsoft Windows development to git
-  * They're developing the Git Virtual File System (GVFS)
-* Twitter
-* LinkedIn
-* Netflix
-* Eclipse Foundation
-* Android
-* etc...
-
-
----
-
-# Key points
-
-Git is
-  * distributed
-  * fast
-  * powerful
-  * widespread
-  * well-proven
-  * free
-
-So you should probably use it!
-
----
-
-The problem...
-
-.full-width[![image](img/git_is_a_nightmare.png)]
-
----
-
-class: center, middle
-
-# Fundamentals
-
----
-
-# Fundamentals
-## Git in a nutshell
-
-* History: A one-direction graph
-* Git: A set of tools to manipulate it
-
----
-
-# Fundamentals
-## Primitives
-
-Data structures:
-  * _blob_: content of a file
-  * _tree_: Hierarchy of blobs, a directory
-  * _commit_: Contains a tree (the top-level directory), a timestamp, a message and reference 0-2 parents.
-
-Note: Everything is identified via its SHA-1 hash!
-
-References:
-  * _heads_: Refers to an object locally
-    * _HEAD_: Refers to the currently checked out commit
-    * _branches_: Refer to a commit, 'follows' commits when checked out
-  * _remotes_: Refers to an object in a remote repository
-  * _stash_: Refers to an uncommitted object
-  * _tags_: Refers to a fixed point in history
-
----
-
-# Fundamentals
-## A Commit under the microscope
-
-A commit is a structure containing a tree, message, author, timestamp, parent
-
-```
-$ git cat-file 85e3c6ee48468ed813681aadcb7a2dfa28a82b47 -p
-tree 1dcd8b30d71a3e377753b63c67569090b6b8e715
-parent 215b494bb1572a3b3895c72edfd35dac30afab7e
-author Yacine Mekesser <ymekesser@hotmail.com> 1503234285 +0200
-committer Yacine Mekesser <ymekesser@hotmail.com> 1503234285 +0200
-
-created an example for a centralized workflow
-```
-
-The commits SHA-1 hash is hashed over the whole content
-
-Git makes sure that __anything you committed is save__
-
-1. A commit is defined and adressed by its hash
-2. The hash changes if _anything_ in the commit changes
-3. Commits are not deleted *
-
-There are only two potentially destructive commands:
-
-`git reset --hard` and `git checkout`
-
-.addendum[\* Unreachable commits do eventually get garbage collected]
-
-???
-
-anything you committed is save
-* this is important
-* git makes it incredibly hard to mess things up
-  * there are only a few destructive operations, and they all discard only changes in your work dir
-  * reset --hard, checkout
-
-This means that no matter what changes, the commit receives a new ID
-
----
-
-# Fundamentals
-## Example
-
-.fixed-height-300[![image](img/fundamental_example_1.png)]
-
-```
-$ git checkout master
-```
-
----
-
-# Fundamentals
-## Example
-
-.fixed-height-300[![image](img/fundamental_example_2.png)]
-
-```
-$ git commit
-```
-
-* Checked out branch follows new commits
-* `HEAD` follows checked out branch
-
----
-
-# Fundamentals
-## Example
-
-.fixed-height-300[![image](img/fundamental_example_3.png)]
-
-```
-git reset C
-```
-* Branch gets set back to `C`
-* `HEAD` still follows checked out branch
-* Note: `D` does still exist
-
----
-
-# Fundamentals
-## Example
-
-.fixed-height-300[![image](img/fundamental_example_4.png)]
-
-```
-$ git checkout B
-```
-* Commits can be checked too
-* This leads to a _detached HEAD state_
-
----
-
-# Fundamentals
-## Reflog: The saviour of lives
-
-The __Reflog__ is a log of all operations performed in a repository.
-
-```
-$ git reflog
-
-05ca429 HEAD@{11}: rebase -i (finish): returning to refs/heads/master
-05ca429 HEAD@{12}: rebase -i (pick): test: fixed some unit tests
-51c02dc HEAD@{13}: rebase -i (squash): refactor: removed unnecessary imports and variables
-caa3df9 HEAD@{14}: rebase -i (start): checkout HEAD~5
-65586a3 HEAD@{15}: rebase -i (finish): returning to refs/heads/master
-65586a3 HEAD@{16}: rebase -i (start): checkout HEAD~5
-65586a3 HEAD@{17}: rebase -i (finish): returning to refs/heads/master
-65586a3 HEAD@{18}: rebase -i (start): checkout HEAD~5
-65586a3 HEAD@{19}: commit: removed TODO
-cc71c4c HEAD@{20}: commit: test: fixed some unit tests
-caa3df9 HEAD@{21}: commit: refactor: removed unnecessary imports
-ec563bf HEAD@{22}: reset: moving to HEAD~1
-79a1c6f HEAD@{23}: commit: refactor: removed unnecessary imports
-ec563bf HEAD@{24}: commit: refactor: Minor refactorings
-f2f056f HEAD@{25}: commit: chore: added tslint rules to find unused code
-```
-
-It logs the commit in which the operation _ended_ too, so you can reset to it anytime:
-
-```
-$ git reset 65586a3
-```
-
-???
-
-If you take one thing away from this presentation, then it's this.
-
-No matter what you did, you find it in the reflog
-
-Remember: when you reset to a commit, it will restore the WHOLE PROJECT to exactly this state,
-INCLUDING the history. This is the magical part of the Hash id. As it hashes over the parent too,
-and the parent over its parent etc., you just need to know the hash of a commit and this includes not 
-only the change but everything which came before too.
-
----
-
-# Tooling
-## Basic Setup
-
-My personal setup for Windows:
-* Git for Windows
-* cmder
-  * Unix-like shell based on ConEmu
-  * comes with Git for Windows
-* VS Code
-
-???
-
-TODO: Decide where to put this
-
-* Git for Windows
-  * Brings their own bash
-* cmder
-  * Looks nice
-  * Unix-commands are easier and more versatile than windows cmd
-  * Integrates better with git, which is a linux tool
-* VS Code
-  * lightweight and nice
-
----
-
-# Tooling
-## Graphical User Interfaces
-
-* Nice to visualize History
-* Can help with some operations
-* Never as powerful or precise as the CL
-* May hide or rename operations
-* Examples:
-  * Tortoise Git
-  * Sourcetree
-* Note: git comes with gitk
-
-???
-TODO: Decide where to put this
-
-* Why not GUI:
-  * Use CL at the beginning to really understand what you are doing
-  * After that, you are probably quicker in the CL already
-  * Allows for more customization
-
-* Tortoise Git
-  * Based on Tortoise SVN
-  * Looks a bit dated, but is quite powerful
-* Sourcetree
-  * By Atlassian
+3. Further pointers
 
 ---
 
@@ -465,7 +43,7 @@ You can define the default editor via the config too:
 ```
 $ git config --global core.editor code --wait
 ```
-`--wait` flag is needed with VS Code, otherwise the window will close right again
+`--wait` flag is needed with VS Code, otherwise the window will close again immediately
 
 The same goes for individual diff/merge tools:
 ```
@@ -601,13 +179,13 @@ $ git log -3
 Shows you only the 3 most recent commits
 
 ```
-$ git --after="2017-08-21" --before="2017-09-02"
+$ git log --after "2017-08-21" --before "2017-09-02"
 ```
 Shows you only commits between those two dates.
 Great to list commits from a specific sprint or search for a bug.
 
 ```
-$ git --author="Johnny"
+$ git log --author "Johnny"
 ```
 Shows only the commits where the author contains "Johnny". Allows for Regular expressions too!
 
@@ -616,7 +194,7 @@ Shows only the commits where the author contains "Johnny". Allows for Regular ex
 ## More filters
 
 ```
-git log --grep="JRA-1983"
+git log --grep "JRA-1983"
 ```
 Filters commits by their message. Very useful if you include your issue-ID in the message (which you should)
 ```
@@ -641,7 +219,7 @@ $ git log master..feature
 ```
 Shows you the commits which are in the feature branch, but not in the master branch.
 
-If you switch it to `feature..master` you will see what commits are missing from feature
+`feature..master` shows commits on master after you branched off.
 
 ---
 
@@ -656,7 +234,7 @@ Shows you a much quicker summary
 ```
 $ git log --stat
 ```
-For each commit, list all changed files and how many lines changed
+For each commit, list all changed files and how many lines have changed
 
 ```
 $ git log --patch
@@ -666,7 +244,7 @@ If you want to see the whole diffs for each commit
 ```
 $ git log --graph
 ```
-Draws your history as an ASCII graph. Look at your history as the graph it really is.
+Draws your history as the graph it really is. Looks like ASCII art.
 
 ---
 
@@ -726,7 +304,7 @@ The `!` prefix lets git execute the command in the shell. This allows you to
 * use parameters
 
 ```
-$ git config alias.findBranch = "!git branch | grep -i"
+$ git config alias.findBranch "!git branch | grep -i"
 $ git findBranch JIRA-123
 ```
 This helps you find the correct feature branch for an issue.
@@ -734,10 +312,7 @@ This helps you find the correct feature branch for an issue.
 Tip: Wrap more complex commands into a shell function: 
 ```
 [alias]
-bclean = "!f() {
-    git branch --merged ${1-master} 
-    | grep -v \" ${1-master}$\" 
-    | xargs -r git branch -d; }; f"
+  cleanup = "!f() { git branch --merged ${1:-master} | egrep -v \"(^\\*|${1:-master})\" | xargs --no-run-if-empty git branch -d; };f"
 ```
 This cleans up all merged branches.
 
@@ -761,11 +336,11 @@ This cleans up all merged branches.
 Aliases for (semantic commit messages)[https://seesparkbox.com/foundry/semantic_commit_messages] including Issue ID:
 ```
 [alias]
-feat     = "!f() { git commit -m \"$1 - feat: $2\" }; f"
-docs     = "!f() { git commit -m \"$1 - docs: $2\" }; f"
-chore    = "!f() { git commit -m \"$1 - chore: $2\" }; f"
-fix      = "!f() { git commit -m \"$1 - fix: $2\" }; f"
-refactor = "!f() { git commit -m \"$1 - refactor: $2\" }; f"
+feat     = "!f() { git commit -m \"$1 - feat: $2\"; }; f"
+docs     = "!f() { git commit -m \"$1 - docs: $2\"; }; f"
+chore    = "!f() { git commit -m \"$1 - chore: $2\"; }; f"
+fix      = "!f() { git commit -m \"$1 - fix: $2\"; }; f"
+refactor = "!f() { git commit -m \"$1 - refactor: $2\"; }; f"
 ```
 
 ```
@@ -792,14 +367,14 @@ If one thinks this further, maybe you could parse the issue id from the feature 
 
 ```
 [alias]
-cma = !git add -A; git commit -m
-caa = commit -a --amend -C HEAD
+	cma = "!git add -A; git commit -m"
+	caa = commit -a --amend -C HEAD
 ```
 
 For your daily standup:
 ```
 [alias]
-standup = !git log --all --author=$USER --since="9am yesterday" --format=%s
+	standup = "!git log --all --author=$USER --since=\"9am yesterday\" --format=%s"
 ```
 
 .addendum[Source: Tim Pettersen from BitBucket]
@@ -856,9 +431,14 @@ Then link them in your local or global config via `[include]`
 ```
 $ git commit --amend 
 ```
-To _add_ the staged changes to the latest commit.
+_Update_ the latest commit instad of creating a new one.
 
 Lets you update the commit message too.
+
+```
+$ git commit --amend -C HEAD
+```
+To keep the current message
 
 ---
 
@@ -1092,6 +672,51 @@ This makes it easier to
   * understand your projects history
   * undo features
   * find bugs
+
+---
+
+# Don't Panic!
+## Git never forgets
+
+Git makes sure that **anything you committed is safe**
+
+1. A commit is defined and adressed by its hash
+2. Commits are readonly, any change results in a _new_ commit with a _new_ hash
+3. Commits can be unreachable by any HEAD, but still exist in the repository
+
+There are few destructive commands:
+
+* `git reset --hard`
+* `git checkout`
+
+---
+
+# Don't Panic!
+## Reflog
+
+The **Reflog** is a log of all operations perfomed in a repository
+
+```
+$ git reflog
+
+8229a31 (HEAD -> master) HEAD@{0}: reset: moving to HEAD
+8229a31 (HEAD -> master) HEAD@{1}: reset: moving to 8229a315714b7856bc
+b071e14 HEAD@{2}: commit: foo
+8229a31 (HEAD -> master) HEAD@{3}: reset: moving to 8229a315714b7856bc
+0a6aeb8 HEAD@{4}: commit (amend): Added basic todolist implementation
+0b335c1 HEAD@{14}: commit: Implement add todos in the store
+176c878 HEAD@{15}: commit: Enable redux devtools extension
+c19e48e HEAD@{16}: commit: Add basic store setup
+a9d1ae8 HEAD@{17}: commit: Basic components setup
+a26f277 HEAD@{18}: commit: Remove unneeded code
+c3f1332 HEAD@{19}: commit (initial): Initialize project using Create React App
+```
+
+It logs the commit in which the operation _ended_ in, so you can reset to it anytime:
+
+```
+git reset ff6a66c
+```
 
 ---
 
@@ -1371,16 +996,19 @@ E.g. the master branch is kinda redundant, if you don't need to build from it yo
 ---
 
 # Forking Workflow
+
 ## Going fully distributed
 
 On a developer level .addendum[(the Open Source approach)]
-  * Every developer has his own server-side repository
-  * _Only_ project maintainer can push to the official repository
+
+* Every developer has his own server-side repository
+* _Only_ project maintainer can push to the official repository
 
 On a supplier level
-  * Project team works on the official repository
-  * Suppliers have their forks, no write-access to offical repository
-  * Project team pulls work from suppliers after reviewing them
+
+* Project team works on the official repository
+* Suppliers have their forks, no write-access to offical repository
+* Project team pulls work from suppliers after reviewing them
 
 .fixed-height-300.center[![image](img/forking_workflow.png)]
 
@@ -1439,6 +1067,8 @@ Git LFS
 # Links
 * Official Website: https://git-scm.com
 * Interactive branching tutorial & sandbox: http://learngitbranching.js.org
+* Another interactive branching sandbox: http://git-school.github.io/visualizing-git/
+* A Visual Git Reference: https://marklodato.github.io/visual-git-guide/index-en.html
 
 ---
 
